@@ -1,4 +1,4 @@
-package com.boge.utils;
+package com.boge.utils.distributedlock;
 
 import java.time.Duration;
 import java.time.Instant;
