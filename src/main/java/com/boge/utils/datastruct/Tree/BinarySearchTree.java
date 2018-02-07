@@ -81,13 +81,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 		printTree(root);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	private boolean contains(T e,BinaryNode<T> t){
 		
 		if(t == null)return false;
@@ -167,8 +160,14 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 	private void printTree(BinaryNode<T> t){
 		if(t != null){
 			System.out.println(t.element);
-			printTree(t.left);
-			printTree(t.right);
+			if(t.left != null){
+				System.out.println(t.element+"的左孩子为:");
+				printTree(t.left);
+			}
+			if(t.right != null){
+				System.out.println(t.element+"的右孩子为:");
+				printTree(t.right);
+			}
 		}
 	}
 }
