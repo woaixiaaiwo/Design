@@ -1,5 +1,10 @@
 package com.boge.utils.datastruct.Tree;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -205,6 +210,7 @@ public class AVLTree<T extends Comparable<? super T>>{
 	private AVLNode<T> leftDoubleRotate(AVLNode<T> k1){
 		//先进行左孩子结点的右单旋转
 		k1.left = rightSignalRotate(k1.left);
+		//再进行一次左单旋转
 		return leftSignalRotate(k1);
 	}
 	
@@ -214,20 +220,21 @@ public class AVLTree<T extends Comparable<? super T>>{
 	private AVLNode<T> rightDoubleRotate(AVLNode<T> k1){
 		//先进行右孩子结点的左单旋转
 		k1.right = leftSignalRotate(k1.right);
+		//再进行一次右单旋转
 		return rightSignalRotate(k1);
 	}
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
-		/*BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+		BinarySearchTree<Integer> tree = new BinarySearchTree<>();
 		tree.insert(8);
 		tree.insert(3);
 		tree.insert(2);
 		tree.insert(5);
 		tree.insert(1);
 		tree.insert(9);
-		tree.printTree();*/
+		tree.printTree();
 		
 		AVLTree<Integer> tree1 = new AVLTree<>();
 		tree1.insert(2);
@@ -239,5 +246,23 @@ public class AVLTree<T extends Comparable<? super T>>{
 		System.out.println("-----------------------");
 		tree1.remove(1);
 		tree1.printTree();
+	}*/
+	
+	//层序遍历
+	private void printBySequence(){}
+	
+	//求树的最小深度
+	private int getMinHeight(){
+		return 0;
+	}
+	
+	
+	public static void main(String[] args) {
+		LocalDate localDate = LocalDate.now();
+		//计算今天是当年的第几周
+		System.out.println(ChronoUnit.DAYS.between(localDate.with(TemporalAdjusters.firstDayOfYear()),localDate)/7+1);
+		
+        int i = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+        System.out.println(i);
 	}
 }
