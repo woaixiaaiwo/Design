@@ -249,6 +249,8 @@ public class AVLTree<T extends Comparable<? super T>>{
 	}*/
 	
 	//层序遍历
+	//使用队列很方便实现
+	//根据树的高度进行递归也可，但是效率会差点
 	private void printBySequence(){}
 	
 	//求树的最小深度
