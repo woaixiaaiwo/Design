@@ -1,15 +1,10 @@
 package com.boge.algorithm;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
+
 
 /**
  * 实现支持 '.' 和 '*' 的正则表达式匹配。
@@ -26,6 +21,8 @@ import org.apache.commons.lang.StringUtils;
 	isMatch("aa", ".*") → true
 	isMatch("ab", ".*") → true
 	isMatch("aab", "c*a*b") → true 
+	
+	由于涉及到NFA到DFA的化简，暂时不做
  */
 public class RegularExpressionMatching {
 
@@ -36,19 +33,22 @@ public class RegularExpressionMatching {
 	//代表任意的输入
 	private static String split = "#";
 	
+	private static int lastState = 0;
+	
 	public static boolean isMatch(String s, String p) {
 		char[] charArr = s.toCharArray();
 		
 		if(charArr.length == 0){
-			if(StringUtils.isEmpty(p)){
+			if(p == null || "".equals(p)){
 				return true;
 			}else{
 				return false;
 			}
 		}
 		
-		Integer state=0;
-		HashMap<Integer,Map<String,String>> map = (HashMap<Integer,Map<String,String>>) createSimpleDfa(p);
+		Integer state = 0;
+		if(state == null)return false;
+		HashMap<Integer,Map<String,String>> map = (HashMap<Integer,Map<String,String>>) createSimpleNfa(p);
 		Map<String,String> regular = null;
 		int i = 0;
 		boolean notMatch = true;
@@ -88,13 +88,16 @@ public class RegularExpressionMatching {
 				break;
 			}
 		}
-		if(state==map.size()){
+		if(state==lastState){
 			return true;
 		}
         return false;
     }
 	
-	private static Map<Integer,Map<String,String>> createSimpleDfa(String p){
+	/**
+	 * 通过正则表达式创建简单的NFA 
+	 */
+	private static Map<Integer,Map<String,String>> createSimpleNfa(String p){
 		
 		char[] charArr = p.toCharArray();
 		
@@ -108,6 +111,7 @@ public class RegularExpressionMatching {
 			if(charArr[i] == '.'){
 				putValue(dfaMap,state,any+split+(state+1+""));
 				state = state+1;
+				lastState = state;
 			}else if(charArr[i] == '*'){
 				if(charArr[i-1] == '.'){
 					state = state-1;
@@ -115,13 +119,18 @@ public class RegularExpressionMatching {
 					putValue(dfaMap,state,any+split+(state+""));
 				}else{
 					putValue(dfaMap,state,charArr[i-1]+split+(state+""));
+					if(i+1 <= charArr.length-1){
+						putValue(dfaMap,state-1,charArr[i+1]+split+((state+1)+""));
+					}
 				}
+				lastState = state;
 			}else{
 				putValue(dfaMap,state,charArr[i]+split+(state+1)+"");
-				if(hasAny != -1 && hasAny != state){
+				if(hasAny != -1){
 					putValue(dfaMap,state,"rollback"+split+(hasAny)+"");
 				}
 				state = state+1;
+				lastState = state;
 			}
 		}
 		
@@ -142,14 +151,14 @@ public class RegularExpressionMatching {
 		
 		HashMap<Integer,Map<String,String>> map = new HashMap<>();
 		
-		String p = "fd.*f.*sdff";//"fd.*f.*sdff";
+		String p = "a*a";//"fd.*f.*sdff";
 		
-		map = (HashMap<Integer,Map<String,String>>) createSimpleDfa(p);
+		map = (HashMap<Integer,Map<String,String>>) createSimpleNfa(p);
 		
 		for(Map.Entry<Integer,Map<String,String>> entry:map.entrySet()){
 			System.out.println(entry.getKey()+":"+entry.getValue());
 		}
-		
-		System.out.println(isMatch("fdfsdffffffsdfsd","fd.*f.*sdf"));
+		System.out.println(lastState);
+		System.out.println(isMatch("aaa","a*a"));
 	}
 }

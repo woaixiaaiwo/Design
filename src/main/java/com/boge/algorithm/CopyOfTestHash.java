@@ -5,15 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TestHash {
+public class CopyOfTestHash {
 	
-	private final static Double allowNumber = 0.2;
+	private final static int allowNumber = 100;
 
 	public static void main(String[] args) {
 		
 		String[] resolutions = {"1024x768",
 				"1080x1920",
-				"1024x1366",
 				"1280x720",
 				"1366x768",
 				"1440x900",
@@ -29,7 +28,6 @@ public class TestHash {
 				"360x640",
 				"360x720",
 				"375x667",
-				"375x812",
 				"377x459",
 				"377x707",
 				"381x246",
@@ -51,7 +49,6 @@ public class TestHash {
 				"640x360",
 				"720x1280",
 				"768x1024",
-				"360x640",
 				"800x1280",
 				"800x600",
 				"854x480"};
@@ -70,28 +67,43 @@ public class TestHash {
 		for(String resolution:resolutions){
 			isMatch = false;
 			resolutionArr = resolution.split("x");
+			if(map.get(resolutionArr[0]) == null){
+				map.put(resolutionArr[0],resolution);
+			}else{
+				String data = map.get(resolutionArr[0]);
+				map.put(resolutionArr[0],data+","+resolution);
+			}
+			/*
 			width = Integer.valueOf(resolutionArr[0]);
-			height = Integer.valueOf(resolutionArr[1]);
-			String mapData = "";
-			for(String resolution1:resolutions){
-				if(!resolution.equals(resolution1)){
-					if(match(resolution1, width, height)){
-						mapData = mapData+","+resolution1;
+			height = Integer.valueOf(resolutionArr[1])
+			if(map.size() == 0){
+				map.put(resolution,resolution);
+			}else{
+				for(String mapResolution:map.keySet()){
+					if(match(mapResolution, width, height)){
+						isMatch = true;
+						String mapData = map.get(mapResolution);
+						map.put(mapResolution,mapData+","+resolution);
+						break;
 					}
 				}
-			}
-			map.put(resolution, mapData);
+				if(!isMatch){
+					if(map.get(resolution) == null){
+						map.put(resolution, resolution);
+					}
+				}
+			}*/
 		}
 		return map;
 	}
 	
-	private static boolean match(String res,Integer width,Integer height){
+	/*private static boolean match(String res,Integer width,Integer height){
 		Integer mWidth = Integer.valueOf(res.split("x")[0]);
 		Integer mHeight = Integer.valueOf(res.split("x")[1]);
 		Double data1 = Math.pow((mWidth-width),2)+Math.pow((mHeight-height),2);
-		Double data2 = Math.pow(width*allowNumber,2);
+		Double data2 = Math.pow(allowNumber,2);
 		return  data1<=data2 ;
-	}
+	}*/
 	
 	private static void print(Map<String,String> map){
 		for(Map.Entry<String,String> entry:map.entrySet()){
