@@ -50,6 +50,15 @@ public class WeakReferences {
         System.gc();
         Thread.sleep(2000);
         System.out.println(map.get(weakRef.get()));
+
+        //此处使用WeakHashMap，key是一个对象，但是没有其他引用指向它
+        //所以会被GC回收，map的长度会变化
+        Map<Sample,String> map2 = new WeakHashMap<Sample, String>();
+        map2.put(new Sample(),"gh");
+        System.out.println(map2.size());
+        System.gc();
+        Thread.sleep(2000);
+        System.out.println(map2.size());
 	}
 	
 }
