@@ -2,44 +2,53 @@ package com.boge.algorithm.sorts.sortclasses;
 
 import java.util.Arrays;
 
+import com.boge.algorithm.sorts.utils.DataCreaterUtils;
 
-public class MeargeSort implements BaseSort {
+
+public class MeargeSort implements BaseSort{
 	
-	public void sort(int[] arr){
-	}
 	
-	public static void main(String[] args) {
+	
+/*	public static void main(String[] args) {
 		
-		int[] arr = {1,2,0,3,1,4};
+		int[] arr = DataCreaterUtils.createIntArr(10,100);//{0,2,1,5,3,4};
 		
-		int[] tem = new int[arr.length];
-		
-		meargeSort(arr,tem,0,3);
+		mSort(arr,0,arr.length-1);
+		//meargeSort(arr,tem,0,5);
 		
 		System.out.println(Arrays.toString(arr));
+		System.out.println(DataCreaterUtils.isSorted(arr));
 		
+	}*/
+	
+	public void sort(int[] arr){
+		System.out.println("归并排序：");
+		mSort(arr,0,arr.length-1);
 	}
 	
-	private static void mSort(int[] arr,int tmpArr[]){
-		
-		
-		
+	private static void mSort(int[] arr,int begin,int end){
+		if(begin == end)return;
+		mSort(arr,begin,(begin+end)/2);
+		mSort(arr,(begin+end)/2+1,end);
+		meargeSort(arr,begin,end);
 	}
 	
-	private static void meargeSort(int arr[],int tmpArr[],int begin,int end){
+	private static void meargeSort(int arr[],int begin,int end){
 		
 
 		
 		int length = end-begin+1;
 		
-		int center = length/2;
+		int center = (begin+end)/2;
 		
 		int leftStart = begin;
-		int leftEnd = center>begin?center-1:begin;
+		int leftEnd = center;
 		
 		int rightStart = leftEnd+1;
 		int rightEnd = end;
 		int i=0;
+		
+		int tmpArr[] = new int[length];
 		
 		while(leftStart<=leftEnd && rightStart<=rightEnd){
 			if(arr[leftStart] < arr[rightStart]){

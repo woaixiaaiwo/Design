@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class InsertSort implements BaseSort{
 	
 	public void sort(int[] arr){
+		System.out.println("插入排序：");
 		int tmp,i,j;
 		for(i=1;i<arr.length;i++){
 			tmp = arr[i];

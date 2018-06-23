@@ -1,10 +1,9 @@
 package com.boge.algorithm.sorts.sortclasses;
 
-import java.util.Arrays;
-
 public class ShellSort implements BaseSort {
 	
 	public void sort(int[] arr){
+		System.out.println("希尔排序：");
 		int tmp,j,length;
 		length = arr.length;
 		for(int gap=length/2;gap>0;gap/=2){

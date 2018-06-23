@@ -6,6 +6,10 @@ import java.lang.reflect.Proxy;
 
 import com.boge.algorithm.sorts.sortclasses.BaseSort;
 import com.boge.algorithm.sorts.sortclasses.HeapSort;
+import com.boge.algorithm.sorts.sortclasses.InsertSort;
+import com.boge.algorithm.sorts.sortclasses.MeargeSort;
+import com.boge.algorithm.sorts.sortclasses.QuickSort;
+import com.boge.algorithm.sorts.sortclasses.ShellSort;
 import com.boge.algorithm.sorts.utils.DataCreaterUtils;
 
 public class TestSort {
@@ -25,7 +29,6 @@ public class TestSort {
 			this.obj = obj;
 		}
 		
-		@Override
 		public Object invoke(Object proxy, Method method, Object[] args)
 				throws Throwable {
 			// TODO Auto-generated method stub
@@ -43,9 +46,28 @@ public class TestSort {
 	
 	public static void main(String[] args) {
 		
-		int[] arr = DataCreaterUtils.createIntArr(10,10000000);
+		int eleNum = 300000;
+		int maxNum = 10000000;
+		
+		int[] arr = DataCreaterUtils.createIntArr(eleNum,maxNum);
 		BaseSort heapSort = (BaseSort) SortProxy.getProxy(new HeapSort());
 		heapSort.sort(arr);
+		
+		arr = DataCreaterUtils.createIntArr(eleNum,maxNum);
+		heapSort = (BaseSort) SortProxy.getProxy(new MeargeSort());
+		heapSort.sort(arr);
+		
+		arr = DataCreaterUtils.createIntArr(eleNum,maxNum);
+		heapSort = (BaseSort) SortProxy.getProxy(new ShellSort());
+		heapSort.sort(arr);
+		
+		arr = DataCreaterUtils.createIntArr(eleNum,maxNum);
+		heapSort = (BaseSort) SortProxy.getProxy(new QuickSort());
+		heapSort.sort(arr);
+		
+		/*arr = DataCreaterUtils.createIntArr(eleNum,maxNum);
+		heapSort = (BaseSort) SortProxy.getProxy(new InsertSort());
+		heapSort.sort(arr);*/
 		
 		/*BaseSort heapSort = (BaseSort) SortProxy.getProxy(new InsertSort());
 		heapSort.sort(arr);*/

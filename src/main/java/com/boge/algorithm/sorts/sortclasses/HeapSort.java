@@ -14,7 +14,7 @@ public class HeapSort implements BaseSort{
 	}*/
 	
 	public void sort(int[] arr){
-		
+		System.out.println("堆排序：");
 		int tmp;
 		//先把堆建好
 		buildMaxHeap(arr,arr.length);
