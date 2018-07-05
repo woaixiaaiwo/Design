@@ -2,6 +2,16 @@ package com.boge.algorithm.sorts.sortclasses;
 
 import java.util.Arrays;
 
+/**
+ * 用于字符串排序的计数基数排序
+ * 思路：不使用ArrayList，使用两个数组，一个Count数组，用于表示
+ * 数据的个数，一个offset数组，表示位置。
+ * 如：abc,acb,cba,abc
+ * count:a:1,b:1,c:2
+ * offset:a:0,b:1,c:2
+ * 此时，遍历数组，第一个元素是abc，根据offset数组，其排序后位置为 
+ * 2,所以arr[2]=abc,此时offset[c]+1,count[c]减一。以此类推
+ */
 public class JiShuPaiXu {
 
 	public static void main(String[] args) {
