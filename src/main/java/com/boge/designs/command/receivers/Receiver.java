@@ -1,7 +1,7 @@
 package com.boge.designs.command.receivers;
 
 /**
- * 命令执行者 
+ * 具体执行者 
  */
 public class Receiver {
 
