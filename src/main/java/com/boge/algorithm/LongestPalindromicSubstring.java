@@ -176,7 +176,19 @@ public class LongestPalindromicSubstring {
     }
 	
 	/**
-	 * 求最大回文串的贪婪算法 
+	 * 求最大回文串的贪婪算法（每次判断，获取最优解）
+	 * 思想：
+	 * 比如在字符串中，有某个回文串x，长度为max
+	 * 那么，在读入一个字符时，最优解应该是x的前一个字符和
+	 * 后一个字符和x一起组成回文串，就是i-max-1到i，如果
+	 * 是的话，max的值要加2
+	 * 如果上一步不是回文串，就判断x和x的下一个字符是不是回文
+	 * 串，如果是，max的值要加1
+	 * 如果上述两个条件都不满足，则继续读入字符，且判断字符串
+	 * 的长度最少也要是max+1的，因为已经有一个max长度的
+	 * 回文了，判断字符串的长度小于或等于max的话，没有意义
+	 * 每一步判断，都要把回文串的开始和结束位置记下，以便后面
+	 * 进行切割
 	 */
 	public static String longestPalindrome2(String s) {
 	    char[] ca = s.toCharArray();
@@ -212,7 +224,7 @@ public class LongestPalindromicSubstring {
 	
 	public static void main(String[] args) {
 		String a = "ajjaddjjjajjj";
-		System.out.println(longestPalindrome2(a));
+		System.out.println(longestPalindrome(a));
 	}
 
 }

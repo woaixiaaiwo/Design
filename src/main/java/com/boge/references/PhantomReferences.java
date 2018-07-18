@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 虚引用 
- * 虚幻应用和弱引用的回收机制差不多，都是可以被随时回收的。但是不同的地方是，它的构造方法必须强制传入ReferenceQueue，
+ * 虚幻引用和弱引用的回收机制差不多，都是可以被随时回收的。但是不同的地方是，它的构造方法必须强制传入ReferenceQueue，
  * 因为在jvm回收前(重点： 对，就是回收前，软引用和弱引用都是回收后)，会将PhantomReference对象加入ReferenceQueue中; 
  * 还有一点就是PhantomReference.get()方法永远返回空，不管对象有没有被回收。
  */
