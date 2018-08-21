@@ -38,6 +38,18 @@ public class RecursionTest {
 		
 	}
 	
+	//计算斐波那契数列
+	private static int cal(int n,int[] a) {
+		if(n == 1) {
+			a[0] = 0;
+			return 1;
+		}
+		int f = cal(n-1,a);
+		int res = a[0]+f;
+		a[0] = f;
+		return res;
+	}
+	
 	public static void swap(char[] data,int i,int j){
 		
 		char temp = data[i];

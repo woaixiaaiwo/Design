@@ -9,6 +9,7 @@ import java.util.Arrays;
  * 如：abc,acb,cba,abc
  * count:a:1,b:1,c:2
  * offset:a:0,b:1,c:2
+ * 考虑最后一个字符：
  * 此时，遍历数组，第一个元素是abc，根据offset数组，其排序后位置为 
  * 2,所以arr[2]=abc,此时offset[c]+1,count[c]减一。以此类推
  */

@@ -12,9 +12,10 @@ public class ThreadTest3 {
 			@Override
 			public void run() {
 				while(true) {
-					if(arr[0].x == 'A') {
-						System.out.println('A');
-						arr[0].x = 'B';
+					C c = arr[0];
+					if(c.x == 'A') {
+						System.out.print('A');
+						c.x = 'B';
 					}else {
 						//System.out.println("aaaaaa===="+c.x);
 					}
@@ -26,9 +27,10 @@ public class ThreadTest3 {
 			@Override
 			public void run() {
 				while(true) {
-					if(arr[0].x == 'B') {
-						System.out.println('B');
-						arr[0].x = 'C';
+					C c = arr[0];
+					if(c.x == 'B') {
+						System.out.print('B');
+						c.x = 'C';
 					}else {
 						//System.out.println("bbbbbbbb===="+c.x);
 					}
@@ -40,9 +42,10 @@ public class ThreadTest3 {
 			@Override
 			public void run() {
 				while(true) {
-					if(arr[0].x == 'C') {
+					C c = arr[0];
+					if(c.x == 'C') {
 						System.out.println('C');
-						arr[0].x = 'A';
+						c.x = 'A';
 					}else {
 						//System.out.println("ccccccc===="+c.x);
 					}

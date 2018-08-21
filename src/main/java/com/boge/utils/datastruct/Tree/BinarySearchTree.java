@@ -3,7 +3,7 @@ package com.boge.utils.datastruct.Tree;
 
 
 /**
- * 二叉查找树 
+ * 二叉查找树(二叉排序树)
  */
 public class BinarySearchTree<T extends Comparable<? super T>> {
 
